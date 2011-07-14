@@ -1,12 +1,12 @@
 AUTOMAKE_OPTIONS = foreign
 
-pkgdir = /usr/lib/
+pkgdir = $(datadir)/amule
 ACLOCAL_AMFLAGS = -I m4
 
-pkg_LTLIBRARIES = antiLeech.la
-antiLeech_la_CPPFLAGS = ${ANTILEECH_CPPFLAGS}
-antiLeech_la_LDFLAGS = -module -avoid-version --no-la-files
-antiLeech_la_SOURCES = \
+pkg_LTLIBRARIES = libantiLeech.la
+libantiLeech_la_CPPFLAGS = ${ANTILEECH_CPPFLAGS}
+libantiLeech_la_LDFLAGS = -module -avoid-version --no-la-files
+libantiLeech_la_SOURCES = \
 	antiLeech.h \
 	antiLeech_wx.h \
 	CString_wx.h \
