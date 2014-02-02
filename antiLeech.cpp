@@ -1413,6 +1413,8 @@ LPCTSTR __declspec(dllexport) DLPCheckNameAndHashAndMod(const CString& username,
 //SDC Advanced
 //Ghost Mod check [Bill Lee]
 	int Client_Data[] = {modversion.GetLength(), username.GetLength(), username.ReverseFind(91), /* username.ReverseFind(93), */ 0};
+	//[Persmule] Temporarily disable this check to avoid injustice, because amule cannot always extract modversion successfully from each hello packet.
+	#if 0
 	if (StrStrI(username, _T("speedyp2p.com")) || Client_Data[0]!=0 /* || Client_Data[1]<10 */ || !_tcsstr(username, _T("«")) && !_tcsstr(username, _T("»")))
 	{
 		;
@@ -1422,6 +1424,8 @@ LPCTSTR __declspec(dllexport) DLPCheckNameAndHashAndMod(const CString& username,
 			(int)username[Client_Data[3]-6]==32 && username.ReverseFind(_T('»')) == Client_Data[1]-1 && */
 		return _T("Ghost Mod"); //Their NickName look like a normal eMule Mods but without ModString
 	}
+	#endif
+	//End
 
 //End
 
