@@ -19,12 +19,17 @@ AM_DISABLE_STATIC
 AC_PROG_LIBTOOL
 
 #Check for wx-config
+
 AC_CHECK_PROG(WXCONFIG, [wx-config], [wx-config])
 #I have no plan to migrate the program to wx3 yet, so lock the version dirtily to 2.8.
 ANTILEECH_CPPFLAGS=$(wx-config --version=2.8 --cppflags)
+
 AC_SUBST(ANTILEECH_CPPFLAGS)
 
 # Checks for libraries.
+ANTILEECH_LDFLAGS=$(wx-config --version=2.8 --libs)
+
+AC_SUBST(ANTILEECH_LDFLAGS)
 
 # Checks for header files.
 AC_CHECK_HEADERS([string.h], [wx/string.h], [wx/defs.h])

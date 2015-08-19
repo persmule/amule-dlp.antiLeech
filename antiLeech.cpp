@@ -1313,7 +1313,7 @@ LPCTSTR __declspec(dllexport) DLPCheckNameAndHashAndMod(const CString& username,
 
 	//Check for aedit
 	//remark: a unmodded emule can't send a space at last sign
-	if(modversion.IsEmpty() && username.Right(1)==32)
+	if(modversion.IsEmpty() && username.Right(1)==_T(" "))
 		return _T("AEdit");
 
 	//Check for Hex-Modstring

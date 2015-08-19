@@ -3,6 +3,7 @@
 
 #include <wx/defs.h>
 #include <string.h>
+#include <wctype.h>   // for towlower()
 
 #define LPCTSTR		const wxChar* 
 #define BOOL		bool
