@@ -4,7 +4,7 @@
 # License: GNU GPL v3 or any later version released by Free Software Foundation
 
 #AC_PREREQ([2.65])
-AC_INIT([antiLeech], [44], [http://code.google.com/p/amule-dlp/issues/list])
+AC_INIT([antiLeech], [44], [https://github.com/persmule/amule-dlp/issues])
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE()
 AC_CONFIG_SRCDIR([antiLeech.cpp])
