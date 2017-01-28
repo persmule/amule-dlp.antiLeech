@@ -17,7 +17,7 @@
  		//,_T("[eChanblardNext]")								//21 zz_fly
  };
  
-+const DWORD CantiLeech::DLPVersion = 4404;
++const DWORD CantiLeech::DLPVersion = 4405;
  
 +//deactivate M$WIN-specific codes
 +#if 0
