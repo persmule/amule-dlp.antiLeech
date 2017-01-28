@@ -8,8 +8,8 @@
 +#include "CString_wx.h"
  #include "antiLeech.h"
 +#define __declspec(var)        CantiLeech::
-+#define specialdlp
-+#define All_VeryCD_Mod
++#define SPECIAL_DLP_VERSION
++#define ALL_VERYCD_MOD
  
  #ifdef _DEBUG
  #define new DEBUG_NEW
