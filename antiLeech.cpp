@@ -741,7 +741,7 @@ LPCTSTR __declspec(dllexport) DLPCheckModstring_Hard(LPCTSTR modversion, LPCTSTR
 
 //SDC Advanced
 //Non-Standard ModString check
-	int Client_Data[] = {strMod.GetLength(), 0, 0};
+	int Client_Data[] = {(int)strMod.GetLength(), 0, 0};
 	if (Client_Data[0] < 1 ||
 		_tcsstr(modversion, _T("eserver")) || //eServer
 		_tcsstr(modversion, _T("Apollo")) || //Apollo Mod
@@ -1409,7 +1409,7 @@ LPCTSTR __declspec(dllexport) DLPCheckNameAndHashAndMod(const CString& username,
 
 //SDC Advanced
 //Ghost Mod check [Bill Lee]
-	int Client_Data[] = {modversion.GetLength(), username.GetLength(), username.ReverseFind(91), /* username.ReverseFind(93), */ 0};
+	int Client_Data[] = {(int)modversion.GetLength(), (int)username.GetLength(), username.ReverseFind(91), /* username.ReverseFind(93), */ 0};
 	if (StrStrI(username, _T("speedyp2p.com")) || Client_Data[0] != 0 /* || Client_Data[1] < 10 */ || !_tcsstr(username, _T("«")) && !_tcsstr(username, _T("»")))
 	{
 		;
@@ -1472,7 +1472,7 @@ LPCTSTR __declspec(dllexport) DLPCheckNameAndHashAndMod(const CString& username,
 	}
 
 //Fake ModString check(Type 2)
-	int EACheck[] = {username.GetLength(), (int)username[0], 0, 0, 0, 0, 0, 0}; //Length, First, Second, Last, FirstEnd, SecondEnd, LastStart, Signal
+	int EACheck[] = {(int)username.GetLength(), (int)username[0], 0, 0, 0, 0, 0, 0}; //Length, First, Second, Last, FirstEnd, SecondEnd, LastStart, Signal
 	if (_tcsstr(username, _T("(")) && _tcsstr(username, _T(")"))) //There must be "(" and ")"
 		EACheck[7]++;
 	if (_tcsstr(username, _T("[")) && _tcsstr(username, _T("]"))) //There must be "[" and "]"
