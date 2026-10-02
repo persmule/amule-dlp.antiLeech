@@ -45,6 +45,13 @@ class CString : public wxString{
 			ret.wxString::Trim(true);
 			return ret;
 		}
+		/*
+		 * The M$WIN CString::GetString() returns a mutable reference
+		 * convertible to C-style string, which is unnecessary for
+		 * antiLeech.cpp usage, so we define our own returning
+		 * immutable C-style string instead.
+		 */
+		const wxChar* GetString() const { return c_str(); }
 		//Find(wxChar) and Find(wxChar*) from wxString;
 		int Find(const CString& str)const{	return wxString::Find(str.c_str());	}
 		int ReverseFind(const wxChar c)const{	return wxString::Find(c, true);	}

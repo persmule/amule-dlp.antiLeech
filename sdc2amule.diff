@@ -1,61 +1,58 @@
---- antiLeech.cpp.win	2016-02-15 19:31:18.748711749 +0800
-+++ antiLeech.cpp	2016-02-15 20:49:25.691484626 +0800
-@@ -17,8 +17,11 @@
- //Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-
-
--#include <atlstr.h>
-+#include "CString_wx.h"
+--- antiLeech.cpp.win	2026-10-02 20:45:24.261233220 +0800
++++ antiLeech.cpp	2026-10-03 09:02:27.473739202 +0800
+@@ -30,6 +30,8 @@
+ #include <atlstr.h>
  #include "antiLeech.h"
-+#define __declspec(var)        CantiLeech::
-+#define SPECIAL_DLP_VERSION
-+#define ALL_VERYCD_MOD
-
+ 
++const DWORD CantiLeech::DLPVersion = 4406;
++
  #ifdef _DEBUG
  #define new DEBUG_NEW
-@@ -51,7 +54,10 @@ LPCTSTR apszSnafuTag[]=
- 		//,_T("[eChanblardNext]")								//21 zz_fly
- };
-
-+const DWORD CantiLeech::DLPVersion = 4405;
-
-+//deactivate M$WIN-specific codes
-+#if 0
- BOOL WINAPI  DllMain (
- 					  HANDLE    hModule,
- 					  DWORD     dwFunction,
-@@ -74,6 +80,7 @@ void __declspec(dllexport)  TestFunc()
+ #endif
+@@ -89,7 +91,7 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL,
+ 
+ //SDC team start
+ #if defined(SPECIAL_DLP_VERSION)
+-const DWORD __declspec(dllexport) GetDLPVersion(void)
++DWORD __declspec(dllexport) GetDLPVersion(void)
  {
- 	::MessageBox(NULL,_T("Inside the DLL!"),_T("Nix"),0);
+ 	return DLPVERSION;
  }
-+#endif
-
- //old versions just to keep compatible
- /* //drop old version support
-@@ -285,7 +292,7 @@ LPCTSTR __declspec(dllexport) DLPCheckNa
- */
- //end old version ------------------------------------------
-
--bool IsTypicalHex(CString& addon)
-+bool CantiLeech::IsTypicalHex(const CString& addon)
- {
- 	if(addon.GetLength()>25 || addon.GetLength()<5)
- 		return false;
-@@ -1244,7 +1251,7 @@ LPCTSTR __declspec(dllexport) DLPCheckUs
- 	return NULL;
- }
-
--LPCTSTR __declspec(dllexport) DLPCheckNameAndHashAndMod(CString username, CString& userhash, CString& modversion)
-+LPCTSTR __declspec(dllexport) DLPCheckNameAndHashAndMod(const CString& username, const CString& userhash, const CString& modversion)
- {
- 	if(username.IsEmpty() || userhash.IsEmpty())
- 		return NULL;
-@@ -1309,7 +1316,7 @@ LPCTSTR __declspec(dllexport) DLPCheckNa
-
- 	//Check for aedit
- 	//remark: a unmodded emule can't send a space at last sign
--	if(modversion.IsEmpty() && username.Right(1)==32)
-+	if(modversion.IsEmpty() && username.Right(1)==_T(" "))
- 		return _T("AEdit");
-
- 	//Check for Hex-Modstring
+@@ -319,7 +321,7 @@ LPCTSTR __declspec(dllexport) DLPCheckNa
+ 
+ //SDC team start
+ #if defined(SPECIAL_DLP_VERSION)
+-const bool IsTypicalHex(const CString & addon)
++bool CantiLeech::IsTypicalHex(const CString & addon)
+ #else //Official
+ bool IsTypicalHex(CString & addon)
+ #endif
+@@ -1322,7 +1324,7 @@ LPCTSTR __declspec(dllexport) DLPCheckUs
+ 
+ //SDC team start
+ #if defined(SPECIAL_DLP_VERSION)
+-LPCTSTR __declspec(dllexport) DLPCheckNameAndHashAndMod(const CString username, const CString & userhash, const CString & modversion)
++LPCTSTR __declspec(dllexport) DLPCheckNameAndHashAndMod(const CString & username, const CString & userhash, const CString & modversion)
+ #else //Official
+ LPCTSTR __declspec(dllexport) DLPCheckNameAndHashAndMod(CString username, CString & userhash, CString & modversion)
+ #endif
+@@ -1817,8 +1819,8 @@ LPCTSTR __declspec(dllexport) DLPCheckHe
+ 		case CT_UNKNOWNx76:
+ 		case CT_UNKNOWNxCD:			strSnafuTag = apszSnafuTag[16];break; //buffer = _T("www.donkey2002.to");break;
+ 		case CT_UNKNOWNx88:			strSnafuTag = apszSnafuTag[5];break; //[LSD7c]
+-		case CT_UNKNOWNx8C:			strSnafuTag = apszSnafuTag[5];break; //buffer = _T("[LSD7c]");break;
+-		case CT_UNKNOWNx8D:			strSnafuTag = apszSnafuTag[6];break; //buffer = _T("[0x8d] unknown Leecher - (client version:60)");break;
++		case CT_UNKNOWNx8c:			strSnafuTag = apszSnafuTag[5];break; //buffer = _T("[LSD7c]");break;
++		case CT_UNKNOWNx8d:			strSnafuTag = apszSnafuTag[6];break; //buffer = _T("[0x8d] unknown Leecher - (client version:60)");break;
+ 		case CT_UNKNOWNx99:			strSnafuTag = apszSnafuTag[7];break; //buffer = _T("[RAMMSTEIN]");break; //STRIKE BACK
+ 		case CT_UNKNOWNx97:
+ 		case CT_UNKNOWNx98:
+@@ -1828,7 +1830,7 @@ LPCTSTR __declspec(dllexport) DLPCheckHe
+ 		case CT_UNKNOWNxCE:										//Xman 20.08.05
+ 		case CT_UNKNOWNxCF:										//Xman 20.08.05
+ 		case CT_UNKNOWNx94:										//Xman 20.08.05
+-		case CT_UNKNOWNxC4:			strSnafuTag = apszSnafuTag[8];break; //buffer = _T("[MD5 Community]");break; //USED BY NEW BIONIC => 0x12 Sender
++		case CT_UNKNOWNxc4:			strSnafuTag = apszSnafuTag[8];break; //buffer = _T("[MD5 Community]");break; //USED BY NEW BIONIC => 0x12 Sender
+ 		case CT_UNKNOWNxEC:			strSnafuTag = apszSnafuTag[18];break; //Xman x4 Speedmule
+ //		case CT_FRIENDSHARING:		break;						//STRIKE BACK
+ 		case CT_DARK:											//STRIKE BACK

@@ -11,7 +11,7 @@
 #define DWORD		wxUint32
 #define UINT		wxUint16
 #define WINAPI
-#define HINSTANCE
+#define HINSTANCE	void*
 #define LPVOID		void*
 #define PBYTE		unsigned char*
 #define TCHAR		wxChar

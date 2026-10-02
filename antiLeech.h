@@ -49,7 +49,7 @@ class CantiLeech: public IantiLeech
 {
 public:
 	//BOOL WINAPI DllMain(HINSTANCE hinstDLL,DWORD,LPVOID);
-	virtual DWORD GetDLPVersion(){	return DLPVersion;	}
+	virtual DWORD GetDLPVersion();//{	return DLPVersion;	}
 	//old versions to keep compatible
 	/* //drop old version support
 	virtual LPCTSTR DLPCheckModstring(LPCTSTR modversion, LPCTSTR clientversion);
@@ -157,5 +157,4 @@ private:
 #define ET_MOD_UNKNOWNxDA		0xDA // Rumata (rus)(Plus v1f) - leecher mod?
 //>>> eWombat [SNAFU_V3]
 
-#undef __declspec
 #endif
